@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   User,
 } from "firebase/auth";
+import { getDatabase, ref, get } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,10 +19,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+const database = getDatabase(app);
 
-// provider.setCustomParameters({
-//   prompt: "select_account",
-// });
+provider.setCustomParameters({
+  prompt: "select_account",
+});
 
 const login = () => {
   signInWithPopup(auth, provider).catch(console.error);
@@ -31,12 +33,25 @@ const logout = () => {
   signOut(auth).catch(console.error);
 };
 
-// 사용자의 로그인 상태가 변경될 때마다 이 관찰자가 호출됩니다.
-// 콜백함수가 호출되어 setUser 상태를 업데이트 합니다.
-const onUserStateChange = (callback: (arg0: User | null) => void) => {
-  onAuthStateChanged(auth, (user) => {
-    callback(user);
+const onUserStateChange = <T extends (user: User | null) => void>(
+  callback: T
+) => {
+  onAuthStateChanged(auth, async (user) => {
+    const updatedUser = user ? await adminUser(user) : null;
+    callback(updatedUser);
   });
+};
+
+const adminUser = async (user: User) => {
+  return get(ref(database, "admins")) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const admins = snapshot.val();
+        const isAdmin = admins.includes(user.uid);
+        return { ...user, isAdmin };
+      }
+      return user;
+    });
 };
 
 export { login, logout, onUserStateChange };
