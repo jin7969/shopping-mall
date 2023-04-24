@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { User } from "firebase/auth";
 import { ROUTES } from "../constants";
 import { FiShoppingBag } from "react-icons/fi";
 import { BiShoppingBag } from "react-icons/bi";
-import { login, logout, onUserStateChange } from "../api/firebase";
-
-interface UserInfo extends User {
-  isAdmin?: boolean;
-}
+import { useAuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const [user, setUser] = useState<UserInfo | null>();
-
-  useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
-  }, []);
+  const { user, login, logout } = useAuthContext();
 
   return (
     <header className="flex justify-between border-b px-9 py-4">
