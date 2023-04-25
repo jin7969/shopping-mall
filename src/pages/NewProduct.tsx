@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
+import { uploadImage } from "../api/uploader";
 
 interface ProductData {
   title: string;
@@ -32,7 +33,12 @@ function NewProduct() {
     setProduct((product) => ({ ...product, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {};
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    uploadImage(file as File).then((url) => {
+      console.log("url", url);
+    });
+  };
 
   return (
     <section>
