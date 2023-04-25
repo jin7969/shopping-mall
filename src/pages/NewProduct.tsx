@@ -1,26 +1,19 @@
 import { useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
+import { addNewProduct } from "../api/firebase";
 import { uploadImage } from "../api/uploader";
 
-interface ProductData {
-  title: string;
-  price: string;
-  category: string;
-  description: string;
-  options: string;
-}
-
 function NewProduct() {
-  const [product, setProduct] = useState<ProductData>({
+  const [file, setFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [product, setProduct] = useState({
     title: "",
     price: "",
     category: "",
     description: "",
     options: "",
   });
-  const [file, setFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [success, setSuccess] = useState();
 
   const handleChange = (e: React.ChangeEvent) => {
     const { name, value, files } = e.target as HTMLInputElement;
@@ -35,16 +28,26 @@ function NewProduct() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    uploadImage(file as File).then((url) => {
-      console.log("url", url);
-    });
+
+    setIsUploading(true);
+    uploadImage(file as File) //
+      .then((url) => {
+        addNewProduct(product, url) //
+          .then(() => {
+            setSuccess("상품이 추가되었습니다.");
+            setTimeout(() => {
+              setSuccess("");
+            }, 3000);
+          });
+      })
+      .finally(() => setIsUploading(false));
   };
 
   return (
-    <section>
-      <h1 className="text-center text-2xl font-bold my-6">새로운 상품 등록</h1>
+    <section className="text-center">
+      <h1 className=" text-2xl font-bold my-6">새로운 상품 등록</h1>
       {success && <p className="my-2">✅ {success}</p>}
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         {!file && (
           <div className="flex justify-center items-center w-96 h-[30rem] border-2 text-5xl rounded-xl">
             <AiOutlineFileImage color="#9f9f9f" />
@@ -106,7 +109,7 @@ function NewProduct() {
             onChange={handleChange}
           />
           <button
-            className="py-5 bg-rose-400 text-white font-bold"
+            className="mt-2 py-5 bg-brand text-white font-bold rounded-md"
             disabled={isUploading}
           >
             {isUploading ? "업로드중..." : "상품 등록하기"}

@@ -4,4 +4,12 @@ interface UserInfo extends User {
   isAdmin?: boolean;
 }
 
-export type { UserInfo };
+interface ProductData {
+  title: string;
+  price: string;
+  category: string;
+  description: string;
+  options: string;
+}
+
+export type { UserInfo, ProductData };
