@@ -45,22 +45,20 @@ function NewProduct() {
 
   return (
     <section className="text-center">
-      <h1 className=" text-2xl font-bold my-6">새로운 상품 등록</h1>
-      {success && <p className="my-2">✅ {success}</p>}
-      <div className="flex justify-center items-center">
-        {!file && (
-          <div className="flex justify-center items-center w-96 h-[30rem] border-2 text-5xl rounded-xl">
+      <h1 className=" text-xl font-bold my-6">새로운 상품 등록</h1>
+      <div className="flex justify-between items-center">
+        <div className="flex justify-center items-center w-80 h-96 text-5xl rounded-xl overflow-hidden shadow-lg">
+          {file ? (
+            <img
+              className="w-full h-full "
+              src={URL.createObjectURL(file)}
+              alt="상품 이미지"
+            />
+          ) : (
             <AiOutlineFileImage color="#9f9f9f" />
-          </div>
-        )}
-        {file && (
-          <img
-            className="w-96 h-[30rem] rounded-xl"
-            src={URL.createObjectURL(file)}
-            alt="상품 이미지"
-          />
-        )}
-        <form className="flex flex-col px-14" onSubmit={handleSubmit}>
+          )}
+        </div>
+        <form className="flex flex-col w-80" onSubmit={handleSubmit}>
           <input
             type="file"
             accept="image/*"
@@ -109,13 +107,14 @@ function NewProduct() {
             onChange={handleChange}
           />
           <button
-            className="mt-2 py-5 bg-brand text-white font-bold rounded-md"
+            className="mt-2 py-4 bg-brand text-white font-bold rounded-md"
             disabled={isUploading}
           >
             {isUploading ? "업로드중..." : "상품 등록하기"}
           </button>
         </form>
       </div>
+      {success && <p className="my-7">✅ {success}</p>}
     </section>
   );
 }

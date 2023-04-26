@@ -11,7 +11,7 @@ function Carousel({ images }: { images: ImageProps[] }) {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1500,
     autoplay: true,
     autoplaySpeed: 5000,
     slidesToShow: 1,
@@ -23,7 +23,7 @@ function Carousel({ images }: { images: ImageProps[] }) {
       {images.map((image) => (
         <img
           key={image.id}
-          className="h-80"
+          className="h-72"
           src={image.image}
           alt="배너 이미지"
         />

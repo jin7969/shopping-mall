@@ -13,7 +13,7 @@ body {
 }
 
 #root {
-  @apply w-full max-w-screen-2xl;
+  @apply w-full max-w-2xl;
 }
 
 code {
@@ -22,5 +22,5 @@ code {
 }
 
 input {
-  @apply p-4 outline-none border border-gray-300 my-1;
+  @apply p-3 outline-none border border-gray-300 my-1;
 }

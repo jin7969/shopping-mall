@@ -8,15 +8,15 @@ function Navbar() {
   const { user, login, logout } = useAuthContext();
 
   return (
-    <header className="flex justify-between border-b px-9 py-4">
+    <header className="flex justify-between border-b py-4">
       <Link
         to={ROUTES.HOME}
-        className="flex items-center text-3xl text-brand font-medium"
+        className="flex items-center text-2xl text-brand font-medium"
       >
         <FiShoppingBag className="mr-1" />
-        <h1 className="hidden md:block">Ahns Shop</h1>
+        <h1>Ahns</h1>
       </Link>
-      <nav className="flex items-center gap-6 font-medium">
+      <nav className="flex items-center gap-5 font-medium">
         <Link to={ROUTES.PRODUCTS}>Products</Link>
         {user ? (
           <>
