@@ -2,7 +2,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Carousel({ images }: { images: string[] }) {
+interface ImageProps {
+  id: string;
+  image: string;
+}
+
+function Carousel({ images }: { images: ImageProps[] }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -16,7 +21,12 @@ function Carousel({ images }: { images: string[] }) {
   return (
     <Slider {...settings}>
       {images.map((image) => (
-        <img className="h-80" src={image} alt="배너 이미지" />
+        <img
+          key={image.id}
+          className="h-80"
+          src={image.image}
+          alt="배너 이미지"
+        />
       ))}
     </Slider>
   );
