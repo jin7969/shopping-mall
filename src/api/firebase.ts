@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
-import { ProductData } from "../typings";
+import { NewProductData, ProductData } from "../types";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -56,7 +56,7 @@ const adminUser = async (user: User) => {
     });
 };
 
-const addNewProduct = async (product: ProductData, image: string) => {
+const addNewProduct = async (product: NewProductData, image: string) => {
   const id = uuid();
   return set(ref(database, `products/${id}`), {
     ...product,
@@ -67,4 +67,13 @@ const addNewProduct = async (product: ProductData, image: string) => {
   });
 };
 
-export { login, logout, onUserStateChange, addNewProduct };
+const getProducts = async (): Promise<ProductData[]> => {
+  return get(ref(database, "products")).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
+};
+
+export { login, logout, onUserStateChange, addNewProduct, getProducts };

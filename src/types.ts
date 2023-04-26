@@ -5,6 +5,14 @@ interface UserInfo extends User {
 }
 
 interface ProductData {
+  id: string;
+  image: string;
+  title: string;
+  category: string;
+  price: number;
+}
+
+interface NewProductData {
   title: string;
   price: string;
   category: string;
@@ -12,4 +20,4 @@ interface ProductData {
   options: string;
 }
 
-export type { UserInfo, ProductData };
+export type { UserInfo, ProductData, NewProductData };

@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { UserInfo } from "../typings";
+import { UserInfo } from "../types";
 import { login, logout, onUserStateChange } from "../api/firebase";
 
 interface AuthContextValue {
