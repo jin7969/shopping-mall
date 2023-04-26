@@ -1,4 +1,5 @@
-import Carousel from "../components/Carousel";
+import Carousel from "../components/carousel/Carousel";
+import Products from "../components/Products";
 
 const imageData = [
   {
@@ -22,9 +23,8 @@ const imageData = [
 function Home() {
   return (
     <main>
-      <section>
-        <Carousel images={imageData} />
-      </section>
+      <Carousel images={imageData} />
+      <Products title="이번주 특가" />
     </main>
   );
 }

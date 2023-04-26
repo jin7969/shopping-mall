@@ -3,7 +3,7 @@ import { getProducts } from "../api/firebase";
 import ProductCard from "./ProductCard";
 import { ProductData } from "../types";
 
-function Products() {
+function Products({ title }: { title: string }) {
   const {
     isLoading,
     error,
@@ -14,12 +14,15 @@ function Products() {
   if (error) return <p>error</p>;
 
   return (
-    <ul>
-      {products &&
-        products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-    </ul>
+    <section>
+      <h1>{title}</h1>
+      <ul className="grid grid-cols-3 gap-3 p-3">
+        {products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </ul>
+    </section>
   );
 }
 

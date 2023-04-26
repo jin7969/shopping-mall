@@ -14,7 +14,7 @@ function Navbar() {
         className="flex items-center text-xl text-brand font-semibold"
       >
         <FiShoppingBag className="mr-1" />
-        <h1>Ahns</h1>
+        <h1>AHNs</h1>
       </Link>
       <nav className="flex items-center gap-5 font-medium">
         {user?.isAdmin && (
