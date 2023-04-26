@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ROUTES } from "./constants";
 import "./index.css";
 import App from "./App";
 import Home from "./pages/Home";
@@ -9,8 +10,8 @@ import AllProducts from "./pages/AllProducts";
 import ProductDetail from "./pages/ProductDetail";
 import MyCart from "./pages/MyCart";
 import NewProduct from "./pages/NewProduct";
-import { ROUTES } from "./constants";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import MyPage from "./pages/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      { path: ROUTES.MY_PAGE, element: <MyPage /> },
     ],
   },
 ]);
