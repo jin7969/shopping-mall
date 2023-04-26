@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./index.css";
 
 interface ImageProps {
   id: string;
@@ -19,16 +20,18 @@ function Carousel({ images }: { images: ImageProps[] }) {
   };
 
   return (
-    <Slider {...settings}>
-      {images.map((image) => (
-        <img
-          key={image.id}
-          className="h-72"
-          src={image.image}
-          alt="배너 이미지"
-        />
-      ))}
-    </Slider>
+    <section>
+      <Slider {...settings}>
+        {images.map((image) => (
+          <img
+            key={image.id}
+            className="w-full h-72"
+            src={image.image}
+            alt="배너 이미지"
+          />
+        ))}
+      </Slider>
+    </section>
   );
 }
 
