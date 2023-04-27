@@ -25,7 +25,7 @@ function Carousel({ images }: { images: ImageProps[] }) {
         {images.map((image) => (
           <img
             key={image.id}
-            className="w-full h-72"
+            className="w-full h-96"
             src={image.image}
             alt="배너 이미지"
           />
