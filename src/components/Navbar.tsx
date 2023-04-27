@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "../constants";
 import { FiShoppingBag } from "react-icons/fi";
-import { BiShoppingBag, BiMessageSquareAdd } from "react-icons/bi";
+import { BiMessageSquareAdd } from "react-icons/bi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useAuthContext } from "../context/AuthContext";
 
 function Navbar() {
@@ -23,7 +24,7 @@ function Navbar() {
           </Link>
         )}
         <Link to={ROUTES.MY_CART}>
-          <BiShoppingBag size="24" />
+          <AiOutlineShoppingCart size="24" />
         </Link>
       </nav>
     </header>

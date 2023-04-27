@@ -9,12 +9,12 @@ function ProductCard({ product }: { product: ProductData }) {
 
   return (
     <li
-      className="rounded-lg overflow-hidden cursor-pointer"
+      className="cursor-pointer"
       onClick={() =>
         navigate(`${ROUTES.PRODUCTS}/${id}`, { state: { product } })
       }
     >
-      <img src={image} alt="상품 이미지" />
+      <img src={image} alt="상품 이미지" className="h-64 rounded-md" />
       <h3 className="font-semibold">{`${price.toLocaleString()}원`}</h3>
       <p className="text-zinc-700 text-xs truncate">{title}</p>
       <span className="text-zinc-500 text-xs">{category}</span>

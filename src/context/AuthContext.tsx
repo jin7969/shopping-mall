@@ -7,15 +7,18 @@ import {
 } from "react";
 import { UserInfo } from "../types";
 import { login, logout, onUserStateChange } from "../api/firebase";
+import { User } from "firebase/auth";
 
 interface AuthContextValue {
-  user: UserInfo | null | undefined;
+  user: UserInfo;
+  uid: string;
   login: () => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  user: null,
+  user: {} as User,
+  uid: "",
   login: () => {},
   logout: () => {},
 });
@@ -28,7 +31,9 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, uid: user?.uid, login, logout } as AuthContextValue}
+    >
       {children}
     </AuthContext.Provider>
   );

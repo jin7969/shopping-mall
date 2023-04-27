@@ -7,9 +7,9 @@ import {
   onAuthStateChanged,
   User,
 } from "firebase/auth";
-import { getDatabase, ref, get, set } from "firebase/database";
+import { getDatabase, ref, get, set, remove } from "firebase/database";
 import { v4 as uuid } from "uuid";
-import { NewProductData, ProductData } from "../types";
+import { CartProductData, NewProductData, ProductData } from "../types";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -76,4 +76,29 @@ const getProducts = async (): Promise<ProductData[]> => {
   });
 };
 
-export { login, logout, onUserStateChange, addNewProduct, getProducts };
+const getCart = async (userId: string): Promise<CartProductData[]> => {
+  return get(ref(database, `carts/${userId}`)) //
+    .then((snapshot) => {
+      const items = snapshot.val() || {};
+      return Object.values(items);
+    });
+};
+
+const addOrUpdateToCart = async (userId: string, product: CartProductData) => {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+};
+
+const removeFromCart = async (userId: string, productId: string) => {
+  return remove(ref(database, `carts/${userId}/${productId}`));
+};
+
+export {
+  login,
+  logout,
+  onUserStateChange,
+  addNewProduct,
+  getProducts,
+  getCart,
+  addOrUpdateToCart,
+  removeFromCart,
+};

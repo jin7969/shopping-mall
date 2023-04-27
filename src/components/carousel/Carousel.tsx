@@ -12,9 +12,10 @@ function Carousel({ images }: { images: ImageProps[] }) {
   const settings = {
     dots: true,
     infinite: true,
+    arrows: false,
     speed: 1500,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
