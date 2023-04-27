@@ -10,6 +10,8 @@ interface ProductData {
   title: string;
   category: string;
   price: number;
+  description: string;
+  options: string[];
 }
 
 interface NewProductData {

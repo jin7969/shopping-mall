@@ -15,7 +15,7 @@ function Products({ title }: { title: string }) {
 
   return (
     <section>
-      <h1>{title}</h1>
+      <h1 className="text-lg font-bold px-4">{title}</h1>
       <ul className="grid grid-cols-3 gap-3 p-3">
         {products &&
           products.map((product) => (

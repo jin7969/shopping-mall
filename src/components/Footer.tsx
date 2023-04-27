@@ -24,7 +24,11 @@ function Footer() {
     <footer className="w-[42rem] fixed left-50% bottom-0">
       <ul className="flex justify-around py-1 bg-gray-50 text-gray-500 text-2xl">
         {footerMenu.map((menu) => (
-          <Link to={menu.link} className="flex flex-col items-center">
+          <Link
+            key={menu.id}
+            to={menu.link}
+            className="flex flex-col items-center"
+          >
             {menu.icon}
             <span className="text-sm">{menu.name}</span>
           </Link>
