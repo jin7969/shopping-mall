@@ -1,5 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { ProductData } from "../types";
+import { useAuthContext } from "../context/AuthContext";
+import { useState } from "react";
+import { addOrUpdateToCart } from "../api/firebase";
 
 interface LocationState {
   state: {
@@ -8,13 +11,18 @@ interface LocationState {
 }
 
 function ProductDetail() {
+  const { user } = useAuthContext();
   const {
     state: {
-      product: { image, title, price, description, options },
+      product: { id, image, title, price, description, options },
     },
   } = useLocation() as LocationState;
+  const [selected, setSelected] = useState<string>(options && options[0]);
 
-  console.log(options);
+  const handlePurchaseButton = () => {
+    const product = { id, image, title, price, option: selected, quantity: 1 };
+    user && addOrUpdateToCart(user.uid, product);
+  };
 
   return (
     <section className="p-3">
@@ -27,17 +35,24 @@ function ProductDetail() {
         </div>
         <div>
           <label htmlFor="select">옵션</label>
-          <select id="select" className="w-full my-3 p-2 border outline-none">
+          <select
+            id="select"
+            className="w-full my-3 p-2 border outline-none"
+            onChange={(e) => setSelected(e.target.value)}
+          >
             {options &&
               options.map((option, index) => (
-                <option key={index} value="">
+                <option key={index} value={option}>
                   {option}
                 </option>
               ))}
           </select>
         </div>
-        <button className="w-full py-3 rounded-lg bg-brand text-white text-lg font-extrabold hover:bg-rose-300 ">
-          구매하기
+        <button
+          className="w-full py-3 rounded-lg bg-brand text-white text-lg font-extrabold hover:bg-rose-300"
+          onClick={handlePurchaseButton}
+        >
+          장바구니 담기
         </button>
       </div>
     </section>
