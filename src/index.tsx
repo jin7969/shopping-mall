@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <NotFound description="잘못된 경로입니다." />,
     children: [
       { index: true, path: ROUTES.HOME, element: <Home /> },
       { path: ROUTES.PRODUCTS, element: <AllProducts /> },

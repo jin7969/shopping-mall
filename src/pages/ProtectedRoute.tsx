@@ -1,6 +1,5 @@
-import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import { ROUTES } from "../constants";
+import NotFound from "./NotFound";
 
 interface ProtectedRoutesProps {
   children: JSX.Element;
@@ -15,7 +14,7 @@ function ProtectedRoute({ children, requireAdmin }: ProtectedRoutesProps) {
   }
 
   if (!user || (requireAdmin && !user.isAdmin)) {
-    return <Navigate to={ROUTES.HOME} replace />;
+    return <NotFound description="해당 페이지에 접근할 수 없습니다." />;
   }
   return children;
 }
