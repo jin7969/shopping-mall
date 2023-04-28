@@ -21,8 +21,11 @@ function CartItem({
   const handlePlusQuantity = () =>
     addOrUpdateToCart(uid, { ...product, quantity: quantity + 1 });
 
-  const handleDeleteCartItem = () => removeFromCart(uid, id);
-
+  const handleDeleteCartItem = () => {
+    if (window.confirm("장바구니에서 제거하시겠습니까?")) {
+      removeFromCart(uid, id);
+    }
+  };
   return (
     <li className="flex p-2 bg-gray-50">
       <input type="checkbox" className="w-5 accent-brand" />
