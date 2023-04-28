@@ -8,7 +8,11 @@ interface ProtectedRoutesProps {
 }
 
 function ProtectedRoute({ children, requireAdmin }: ProtectedRoutesProps) {
-  const { user } = useAuthContext();
+  const { loading, user } = useAuthContext();
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
 
   if (!user || (requireAdmin && !user.isAdmin)) {
     return <Navigate to={ROUTES.HOME} replace />;

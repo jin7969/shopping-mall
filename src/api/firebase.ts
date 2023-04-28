@@ -4,7 +4,6 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
-  onAuthStateChanged,
   User,
 } from "firebase/auth";
 import { getDatabase, ref, get, set, remove } from "firebase/database";
@@ -33,15 +32,6 @@ const login = () => {
 
 const logout = () => {
   signOut(auth).catch(console.error);
-};
-
-const onUserStateChange = <T extends (user: User | null) => void>(
-  callback: T
-) => {
-  onAuthStateChanged(auth, async (user) => {
-    const updatedUser = user ? await adminUser(user) : null;
-    callback(updatedUser);
-  });
 };
 
 const adminUser = async (user: User) => {
@@ -93,9 +83,10 @@ const removeFromCart = async (userId: string, productId: string) => {
 };
 
 export {
+  auth,
   login,
   logout,
-  onUserStateChange,
+  adminUser,
   addNewProduct,
   getProducts,
   getCart,
