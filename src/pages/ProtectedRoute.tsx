@@ -4,9 +4,14 @@ import NotFound from "./NotFound";
 interface ProtectedRoutesProps {
   children: JSX.Element;
   requireAdmin?: boolean;
+  description: string;
 }
 
-function ProtectedRoute({ children, requireAdmin }: ProtectedRoutesProps) {
+function ProtectedRoute({
+  children,
+  requireAdmin,
+  description,
+}: ProtectedRoutesProps) {
   const { loading, user } = useAuthContext();
 
   if (loading) {
@@ -14,7 +19,7 @@ function ProtectedRoute({ children, requireAdmin }: ProtectedRoutesProps) {
   }
 
   if (!user || (requireAdmin && !user.isAdmin)) {
-    return <NotFound description="해당 페이지에 접근할 수 없습니다." />;
+    return <NotFound description={description} />;
   }
   return children;
 }

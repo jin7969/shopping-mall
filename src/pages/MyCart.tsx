@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuthContext } from "../context/AuthContext";
 import { getCart } from "../api/firebase";
 import CartItem from "../components/CartItem";
+import NotFound from "./NotFound";
 
 function MyCart() {
   const { uid } = useAuthContext();
@@ -10,12 +11,7 @@ function MyCart() {
   if (isLoading) return <p>Loading...</p>;
 
   if (products && products.length === 0) {
-    return (
-      <section>
-        <p>장바구니가 비어있어요</p>
-        <button>상품 보러가기</button>
-      </section>
-    );
+    return <NotFound description="장바구니가 비어있어요" />;
   }
 
   return (

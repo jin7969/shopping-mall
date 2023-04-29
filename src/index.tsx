@@ -24,7 +24,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.NEW_PRODUCT,
         element: (
-          <ProtectedRoute requireAdmin>
+          <ProtectedRoute
+            requireAdmin
+            description="해당 페이지에 접근할 수 없습니다."
+          >
             <NewProduct />
           </ProtectedRoute>
         ),
@@ -32,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: ROUTES.MY_CART,
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute description="로그인이 필요합니다.">
             <MyCart />
           </ProtectedRoute>
         ),
