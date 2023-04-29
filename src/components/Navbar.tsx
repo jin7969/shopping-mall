@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../constants";
 import { FiShoppingBag } from "react-icons/fi";
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useAuthContext } from "../context/AuthContext";
+import CartStatus from "./CartStatus";
 
 function Navbar() {
-  const { user } = useAuthContext();
+  const { user, uid } = useAuthContext();
 
   return (
     <header className="flex justify-between border-b p-3">
@@ -24,7 +24,7 @@ function Navbar() {
           </Link>
         )}
         <Link to={ROUTES.MY_CART}>
-          <AiOutlineShoppingCart size="24" />
+          <CartStatus uid={uid} />
         </Link>
       </nav>
     </header>
