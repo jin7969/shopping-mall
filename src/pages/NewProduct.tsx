@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
-import { addNewProduct } from "../api/firebase";
 import { uploadImage } from "../api/uploader";
+import { useProducts } from "../hooks/useProducts";
 
 function NewProduct() {
   const [file, setFile] = useState<File | null>(null);
@@ -14,6 +14,7 @@ function NewProduct() {
     description: "",
     options: "",
   });
+  const { addProduct } = useProducts();
 
   const handleChange = (e: React.ChangeEvent) => {
     const { name, value, files } = e.target as HTMLInputElement;
@@ -32,13 +33,17 @@ function NewProduct() {
     setIsUploading(true);
     uploadImage(file as File) //
       .then((url) => {
-        addNewProduct(product, url) //
-          .then(() => {
-            setSuccess("상품이 추가되었습니다.");
-            setTimeout(() => {
-              setSuccess("");
-            }, 3000);
-          });
+        addProduct.mutate(
+          { product, url },
+          {
+            onSuccess: () => {
+              setSuccess("성공적으로 제품이 추가되었습니다.");
+              setTimeout(() => {
+                setSuccess("");
+              }, 4000);
+            },
+          }
+        );
       })
       .finally(() => setIsUploading(false));
   };
