@@ -1,7 +1,6 @@
 import { AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { CartProductData } from "../types";
-import { addOrUpdateToCart } from "../api/firebase";
-import { removeFromCart } from "../api/firebase";
+import useCarts from "../hooks/useCarts";
 
 interface CartItemProps {
   product: CartProductData;
@@ -13,17 +12,19 @@ function CartItem({
   product: { id, image, title, option, quantity, price },
   uid,
 }: CartItemProps) {
+  const { updateCart, removeCart } = useCarts();
+
   const handleMinusQuantity = () => {
     if (quantity === 1) return;
-    addOrUpdateToCart(uid, { ...product, quantity: quantity - 1 });
+    updateCart.mutate({ ...product, quantity: quantity - 1 });
   };
 
   const handlePlusQuantity = () =>
-    addOrUpdateToCart(uid, { ...product, quantity: quantity + 1 });
+    updateCart.mutate({ ...product, quantity: quantity + 1 });
 
   const handleDeleteCartItem = () => {
     if (window.confirm("장바구니에서 제거하시겠습니까?")) {
-      removeFromCart(uid, id);
+      removeCart.mutate(id);
     }
   };
   return (

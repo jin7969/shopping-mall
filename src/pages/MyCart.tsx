@@ -1,13 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
 import { useAuthContext } from "../context/AuthContext";
-import { getCart } from "../api/firebase";
 import CartItem from "../components/CartItem";
 import NotFound from "./NotFound";
 import CartPrice from "../components/CartPrice";
+import useCarts from "../hooks/useCarts";
 
 function MyCart() {
   const { uid } = useAuthContext();
-  const { isLoading, data: products } = useQuery(["carts"], () => getCart(uid));
+  const {
+    cartsQuery: { isLoading, data: products },
+  } = useCarts();
 
   if (isLoading) return <p>Loading...</p>;
 

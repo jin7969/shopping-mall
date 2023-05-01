@@ -1,10 +1,10 @@
-import { useLocation } from "react-router-dom";
-import { ProductData } from "../types";
-import { useAuthContext } from "../context/AuthContext";
 import { useState } from "react";
-import { addOrUpdateToCart } from "../api/firebase";
+import { useLocation } from "react-router-dom";
+import useCarts from "../hooks/useCarts";
+import { useAuthContext } from "../context/AuthContext";
+import { ProductData } from "../types";
 
-interface LocationState {
+interface LocationStateValue {
   state: {
     product: ProductData;
   };
@@ -16,12 +16,13 @@ function ProductDetail() {
     state: {
       product: { id, image, title, price, description, options },
     },
-  } = useLocation() as LocationState;
+  } = useLocation() as LocationStateValue;
   const [selected, setSelected] = useState<string>(options && options[0]);
+  const { updateCart } = useCarts();
 
   const handlePurchaseButton = () => {
     const product = { id, image, title, price, option: selected, quantity: 1 };
-    user && addOrUpdateToCart(user.uid, product);
+    user && updateCart.mutate(product);
   };
 
   return (

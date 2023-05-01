@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { getCart } from "../api/firebase";
+import useCarts from "../hooks/useCarts";
 
 function CartStatus({ uid }: { uid: string }) {
-  const { data: products } = useQuery(["carts"], () => getCart(uid));
+  const {
+    cartsQuery: { data: products },
+  } = useCarts();
 
   return (
     <div className="relative">
