@@ -1,7 +1,7 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import useCarts from "../hooks/useCarts";
 
-function CartStatus({ uid }: { uid: string }) {
+function CartStatus() {
   const {
     cartsQuery: { data: products },
   } = useCarts();

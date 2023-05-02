@@ -9,7 +9,6 @@ interface NewProductValue {
 
 export const useProducts = () => {
   const queryClient = useQueryClient();
-
   const productsQuery = useQuery(["products"], getProducts, {
     staleTime: 1000 * 60,
   });

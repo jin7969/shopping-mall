@@ -2,16 +2,12 @@ import { AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { CartProductData } from "../types";
 import useCarts from "../hooks/useCarts";
 
-interface CartItemProps {
-  product: CartProductData;
-  uid: string;
-}
-
 function CartItem({
   product,
   product: { id, image, title, option, quantity, price },
-  uid,
-}: CartItemProps) {
+}: {
+  product: CartProductData;
+}) {
   const { updateCart, removeCart } = useCarts();
 
   const handleMinusQuantity = () => {

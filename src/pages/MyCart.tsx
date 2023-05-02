@@ -1,11 +1,9 @@
-import { useAuthContext } from "../context/AuthContext";
 import CartItem from "../components/CartItem";
 import NotFound from "./NotFound";
 import CartPrice from "../components/CartPrice";
 import useCarts from "../hooks/useCarts";
 
 function MyCart() {
-  const { uid } = useAuthContext();
   const {
     cartsQuery: { isLoading, data: products },
   } = useCarts();
@@ -28,7 +26,7 @@ function MyCart() {
       <h1 className="py-3 text-xl font-bold">장바구니</h1>
       <ul className="flex flex-col w-full gap-3">
         {products?.map((product) => (
-          <CartItem key={product.id} product={product} uid={uid} />
+          <CartItem key={product.id} product={product} />
         ))}
       </ul>
       <div className="w-full p-4 border-t-4">

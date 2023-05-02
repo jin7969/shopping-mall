@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 import CartStatus from "./CartStatus";
 
 function Navbar() {
-  const { user, uid } = useAuthContext();
+  const { user } = useAuthContext();
 
   return (
     <header className="flex justify-between border-b p-3">
@@ -24,7 +24,7 @@ function Navbar() {
           </Link>
         )}
         <Link to={ROUTES.MY_CART}>
-          <CartStatus uid={uid} />
+          <CartStatus />
         </Link>
       </nav>
     </header>

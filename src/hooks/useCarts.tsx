@@ -6,21 +6,21 @@ import { CartProductData } from "../types";
 const useCarts = () => {
   const { uid } = useAuthContext();
   const queryClient = useQueryClient();
-
-  const cartsQuery = useQuery(["carts"], () => getCart(uid), {
-    staleTime: 1000 * 5,
+  const cartsQuery = useQuery(["carts", uid || ""], () => getCart(uid), {
+    enabled: !!uid,
   });
 
   const updateCart = useMutation(
     (product: CartProductData) => addOrUpdateToCart(uid, product),
     {
-      onSuccess: () => queryClient.invalidateQueries(["carts"]),
+      onSuccess: () => queryClient.invalidateQueries(["carts", uid]),
     }
   );
+
   const removeCart = useMutation(
     (productId: string) => removeFromCart(uid, productId),
     {
-      onSuccess: () => queryClient.invalidateQueries(["carts"]),
+      onSuccess: () => queryClient.invalidateQueries(["carts", uid]),
     }
   );
 
