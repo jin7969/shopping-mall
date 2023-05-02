@@ -1,7 +1,7 @@
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "./ProductCard";
 
-function Products({ title }: { title: string }) {
+function Products({ title }: { title?: string }) {
   const {
     productsQuery: { isLoading, error, data: products },
   } = useProducts();
@@ -11,7 +11,7 @@ function Products({ title }: { title: string }) {
 
   return (
     <section>
-      <h1 className="text-lg font-bold px-4">{title}</h1>
+      {title && <h1 className="text-lg font-bold px-4">{title}</h1>}
       <ul className="grid grid-cols-3 gap-3 p-3">
         {products &&
           products.map((product) => (
