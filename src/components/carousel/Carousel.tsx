@@ -5,10 +5,9 @@ import "./index.css";
 
 interface CarouselProps {
   images: string[];
-  isLoading: boolean;
 }
 
-function Carousel({ images, isLoading }: CarouselProps) {
+function Carousel({ images }: CarouselProps) {
   const settings = {
     dots: true,
     infinite: true,
@@ -19,8 +18,6 @@ function Carousel({ images, isLoading }: CarouselProps) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  if (isLoading) return <p>loading...</p>;
 
   return (
     <section>

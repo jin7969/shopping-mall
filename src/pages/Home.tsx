@@ -8,9 +8,11 @@ function Home() {
     staleTime: 1000 * 60 * 60,
   });
 
+  if (isLoading) return <p>loading...</p>;
+
   return (
     <main>
-      <Carousel images={images} isLoading={isLoading} />
+      <Carousel images={images} />
       <Products title="이번주 할인 상품" />
     </main>
   );
