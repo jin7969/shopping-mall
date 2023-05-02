@@ -57,6 +57,13 @@ const addNewProduct = async (product: NewProductData, image: string) => {
   });
 };
 
+const getBannerImages = () => {
+  return get(ref(database, "banner")).then((snapshot) => {
+    if (snapshot.exists()) return snapshot.val();
+    return [];
+  });
+};
+
 const getProducts = async (): Promise<ProductData[]> => {
   return get(ref(database, "products")).then((snapshot) => {
     if (snapshot.exists()) {
@@ -88,6 +95,7 @@ export {
   logout,
   adminUser,
   addNewProduct,
+  getBannerImages,
   getProducts,
   getCart,
   addOrUpdateToCart,

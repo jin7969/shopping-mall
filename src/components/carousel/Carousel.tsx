@@ -3,12 +3,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
 
-interface ImageProps {
-  id: string;
-  image: string;
+interface CarouselProps {
+  images: string[];
+  isLoading: boolean;
 }
 
-function Carousel({ images }: { images: ImageProps[] }) {
+function Carousel({ images, isLoading }: CarouselProps) {
   const settings = {
     dots: true,
     infinite: true,
@@ -20,14 +20,16 @@ function Carousel({ images }: { images: ImageProps[] }) {
     slidesToScroll: 1,
   };
 
+  if (isLoading) return <p>loading...</p>;
+
   return (
     <section>
       <Slider {...settings}>
-        {images.map((image) => (
+        {images.map((image, index) => (
           <img
-            key={image.id}
+            key={index}
             className="w-full h-96"
-            src={image.image}
+            src={image}
             alt="배너 이미지"
           />
         ))}
