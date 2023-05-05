@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import useCarts from "../hooks/useCarts";
 import { useAuthContext } from "../context/AuthContext";
 import { ProductData } from "../types";
+import { useSnackbarContext } from "../context/SnackbarContext";
 
 interface LocationStateValue {
   state: {
@@ -19,6 +20,7 @@ function ProductDetail() {
   } = useLocation() as LocationStateValue;
   const [selected, setSelected] = useState<string>(options && options[0]);
   const { updateCart } = useCarts();
+  const { showSnackbar } = useSnackbarContext();
 
   const handlePurchaseButton = () => {
     const product = {
@@ -31,6 +33,7 @@ function ProductDetail() {
       checked: true,
     };
     user && updateCart.mutate(product);
+    showSnackbar("장바구니에 추가 되었습니다.");
   };
 
   return (
