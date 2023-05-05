@@ -10,16 +10,14 @@ function MyCart() {
 
   if (isLoading) return <p>Loading...</p>;
 
-  const totalPrice =
-    products &&
-    products.reduce(
-      (prev, current) => prev + current.price * current.quantity,
-      0
-    );
-
-  if (products && products.length === 0) {
+  if (products?.length === 0) {
     return <NotFound description="장바구니가 비어있어요" />;
   }
+  const totalPrice = products?.reduce(
+    (prev, current) =>
+      current.checked ? prev + current.price * current.quantity : prev,
+    0
+  );
 
   return (
     <section className="flex flex-col items-center">
@@ -36,7 +34,11 @@ function MyCart() {
         />
         <CartPrice title="배송비" text="모든 상품 무료배송" />
       </div>
-      <button className="w-full my-1 py-3 bg-brand text-white font-bold text-lg rounded-lg hover:bg-rose-300">
+      <button
+        disabled={totalPrice === 0}
+        className="w-full my-1 py-3 bg-brand text-white font-bold text-lg rounded-lg hover:bg-rose-300 disabled:bg-zinc-200"
+        onClick={() => console.log("click")}
+      >
         구매하기
       </button>
     </section>

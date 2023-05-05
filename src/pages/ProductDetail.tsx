@@ -21,7 +21,15 @@ function ProductDetail() {
   const { updateCart } = useCarts();
 
   const handlePurchaseButton = () => {
-    const product = { id, image, title, price, option: selected, quantity: 1 };
+    const product = {
+      id,
+      image,
+      title,
+      price,
+      option: selected,
+      quantity: 1,
+      checked: true,
+    };
     user && updateCart.mutate(product);
   };
 

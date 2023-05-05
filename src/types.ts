@@ -29,6 +29,7 @@ interface CartProductData {
   price: number;
   option: string;
   quantity: number;
+  checked: boolean;
 }
 
 export type { UserInfo, ProductData, NewProductData, CartProductData };

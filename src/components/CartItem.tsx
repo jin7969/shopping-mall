@@ -4,7 +4,7 @@ import useCarts from "../hooks/useCarts";
 
 function CartItem({
   product,
-  product: { id, image, title, option, quantity, price },
+  product: { id, image, title, option, quantity, price, checked },
 }: {
   product: CartProductData;
 }) {
@@ -23,9 +23,19 @@ function CartItem({
       removeCart.mutate(id);
     }
   };
+
+  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateCart.mutate({ ...product, checked: e.target.checked });
+  };
+
   return (
     <li className="flex p-2 bg-gray-50">
-      <input type="checkbox" className="w-5 accent-brand" />
+      <input
+        type="checkbox"
+        className="w-5 accent-brand"
+        checked={checked}
+        onChange={handleChangeCheckbox}
+      />
       <img src={image} alt="상품 이미지" className="w-28 h-28 ml-4" />
       <div className="flex-1 p-3">
         <p>{title}</p>
