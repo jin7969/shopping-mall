@@ -16,7 +16,7 @@ const SnackbarContext = createContext<SnackbarContextType>({
 });
 
 const SnackbarProvider = ({ children }: { children: ReactNode }) => {
-  const [snackbarInfo, setSnackbarInfo] = useState("11");
+  const [snackbarInfo, setSnackbarInfo] = useState("");
 
   const showSnackbar = (message: string) => {
     setSnackbarInfo(message);

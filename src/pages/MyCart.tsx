@@ -2,11 +2,13 @@ import CartItem from "../components/CartItem";
 import NotFound from "./NotFound";
 import CartPrice from "../components/CartPrice";
 import useCarts from "../hooks/useCarts";
+import { useSnackbarContext } from "../context/SnackbarContext";
 
 function MyCart() {
   const {
     cartsQuery: { isLoading, data: products },
   } = useCarts();
+  const { showSnackbar } = useSnackbarContext();
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -37,7 +39,7 @@ function MyCart() {
       <button
         disabled={totalPrice === 0}
         className="w-full my-1 py-3 bg-brand text-white font-bold text-lg rounded-lg hover:bg-rose-300 disabled:bg-zinc-200"
-        onClick={() => console.log("click")}
+        onClick={() => showSnackbar("구매는 불가합니다.")}
       >
         구매하기
       </button>

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
 import { uploadImage } from "../api/uploader";
 import { useProducts } from "../hooks/useProducts";
+import { useSnackbarContext } from "../context/SnackbarContext";
 
 function NewProduct() {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [success, setSuccess] = useState("");
   const [product, setProduct] = useState({
     title: "",
     price: "",
@@ -15,6 +15,7 @@ function NewProduct() {
     options: "",
   });
   const { addProduct } = useProducts();
+  const { showSnackbar } = useSnackbarContext();
 
   const handleChange = (e: React.ChangeEvent) => {
     const { name, value, files } = e.target as HTMLInputElement;
@@ -37,10 +38,7 @@ function NewProduct() {
           { product, url },
           {
             onSuccess: () => {
-              setSuccess("성공적으로 제품이 추가되었습니다.");
-              setTimeout(() => {
-                setSuccess("");
-              }, 4000);
+              showSnackbar("상품이 등록되었습니다.");
             },
           }
         );
@@ -119,7 +117,6 @@ function NewProduct() {
           </button>
         </form>
       </div>
-      {success && <p className="my-7">✅ {success}</p>}
     </section>
   );
 }
