@@ -25,7 +25,7 @@
 
 <br/>
 
-## 주요 기능
+## ✅ 주요 기능
 
 - [x] firebase를 사용하여 google 로그인 구현
 - [x] cloudinary를 활용한 상품 등록 기능
