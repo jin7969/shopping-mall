@@ -23,6 +23,8 @@ function ProductDetail() {
   const { showSnackbar } = useSnackbarContext();
 
   const handlePurchaseButton = () => {
+    if (!user) return showSnackbar("로그인 후 이용가능 합니다.");
+
     const product = {
       id,
       image,
@@ -32,7 +34,7 @@ function ProductDetail() {
       quantity: 1,
       checked: true,
     };
-    user && updateCart.mutate(product);
+    updateCart.mutate(product);
     showSnackbar("장바구니에 추가 되었습니다.");
   };
 

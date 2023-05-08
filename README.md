@@ -2,7 +2,7 @@
 
 ### 프로젝트 소개
 
-> **react-query, firebase를 활용한 react 웹 어플리케이션** <br/> **배포 주소: https://jin7969.github.io/shopping-mall/** <br/> **개발기간: 2023.04 ~ 진행 중** <br/> **구성원: 개인 프로젝트**
+> **소개: react-query, firebase를 활용한 쇼핑몰 웹 어플리케이션** <br/> **배포 주소: https://jin7969.github.io/shopping-mall/** <br/> **개발기간: 2023.04 ~ 진행 중** <br/> **구성원: 개인 프로젝트**
 
 <br/>
 
