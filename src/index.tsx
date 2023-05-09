@@ -11,6 +11,7 @@ import MyCart from "./pages/MyCart";
 import NewProduct from "./pages/NewProduct";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import MyPage from "./pages/MyPage";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter(
   [
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         { index: true, path: ROUTES.HOME, element: <Home /> },
         { path: ROUTES.PRODUCTS, element: <AllProducts /> },
         { path: `${ROUTES.PRODUCTS}/:id`, element: <ProductDetail /> },
+        { path: ROUTES.SEARCH, element: <Search /> },
         {
           path: ROUTES.NEW_PRODUCT,
           element: (
