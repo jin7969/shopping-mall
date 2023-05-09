@@ -10,7 +10,7 @@ import { ROUTES } from "../constants";
 const footerMenu = [
   { id: "1", link: ROUTES.HOME, name: "홈", icon: <AiOutlineHome /> },
   { id: "2", link: ROUTES.PRODUCTS, name: "전체보기", icon: <AiOutlineMenu /> },
-  { id: "3", link: ROUTES.HOME, name: "검색", icon: <AiOutlineSearch /> },
+  { id: "3", link: ROUTES.SEARCH, name: "검색", icon: <AiOutlineSearch /> },
   {
     id: "4",
     link: ROUTES.MY_PAGE,
